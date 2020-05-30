@@ -5,97 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lockdown efficiency</title>
     <style>
-        .ld-show{
-            display: block;
+        svg{
+            background-color: #ccc;
         }
-        .ld-hide{
-            display: none;
+
+        .lockdown-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-sizing: border-box;
         }
-        .tab-nav{
-            margin: 0 0 10px 0;
+
+        /* Move to Desktop Media Queries */
+        .lockdown-container .ld-visual{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-column-gap: 20px;
         }
-        .tab-nav button{
+
+        .lockdown-container .sub-map{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            align-items: center;
+            grid-column-gap: 20px;
+        }
+        .lockdown-container header{
+            display: grid;
+            grid-template-columns: 35% 65%;
+            align-items: center;
+            grid-column-gap: 20px;
+        }
+        .lockdown-container header ul{
+            list-style: none;
+        }
+        .lockdown-container header ul li{
             display: inline-block;
-            margin: 0 10px 5px 0 ;
-            border: none;
-            background-color: #cccccc;
-            outline: none;
-            padding: 5px 10px;
-            padding: 5px 10px;
-            font-size: 15px;
+            margin: 0 20px 0 0;
         }
-        .tab-nav button.active{
-            background-color: #b63232;
-            color: #FFFFFF;
-        }
-        .tab-nav button:hover{
-            outline: none;
-            background-color: #b63232;
+        .lockdown-container header ul li span{ 
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #000;
+            border-radius: 50%;
         }
     </style>
 </head>
 <body>
-    <div class="lockdown-tab">
-        <div class="tab-nav">
-            <button data-ld="1" class="active">Lockdown 1.0</button>
-            <button data-ld="2" >Lockdown 2.0</button>
-            <button data-ld="3" >Lockdown 3.0</button>
-            <button data-ld="4" >Lockdown 4.0</button>
+
+    <div class="lockdown-container">
+        <header>
+            <h1>Lockdown efficiency</h1>
+            <ul>
+                <li><span></span> No of Confirmed Cases</li>
+                <li><span></span> No of Deaths</li>
+                <li><span></span> No of Tests</li>
+                <li><span></span> LPR(Lock Down Positivity Rate)</li>
+            </ul>
+        </header>
+        <div class="ld-visual">
+            <div class="map">
+                <svg width="100%" height="800px"></svg>
+            </div>
+            <div class="contents">
+                <div class="sub-map">
+                    <h2>Maharashtra</h2>
+                    <div class="selectedmap">
+                        <svg width="100%" height="300px"></svg>
+                    </div>
+                </div>
+                <div class="generatedchart">
+                    <svg width="100%" height="500px"></svg>
+                </div>
+            </div>
         </div>
-        <iframe title="Lock Down 1.0" aria-label="Map" class="ld-show" id="ld1" src="https://datawrapper.dwcdn.net/NEJzi/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
-        </script>
-        
-        <iframe title="Lock Down 2.0" aria-label="Map" class="ld-hide" id="ld2" src="https://datawrapper.dwcdn.net/2s2C0/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
-        </script>
-        
-        <iframe title="Lock Down 3.0" aria-label="Map" class="ld-hide" id="ld3" src="https://datawrapper.dwcdn.net/8Amr3/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
-        </script>
-        
-        <iframe title="Lock Down 4.0" aria-label="Map" class="ld-hide" id="ld4" src="https://datawrapper.dwcdn.net/OEKAL/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
-        </script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-        <script>
-
-        $(".tab-nav button").on("click", function(){
-            $(".tab-nav button").removeClass("active");
-            $(".lockdown-tab iframe").removeClass();
-            var ldno = $(this).data();
-            console.log(ldno.ld, typeof(ldno.ld));
-            $(this).addClass("active");
-
-            if(ldno.ld === 1 ){
-                
-                $("#ld1").addClass("ld-show")
-                $("#ld2").addClass("ld-hide")
-                $("#ld3").addClass("ld-hide")
-                $("#ld4").addClass("ld-hide")
-
-            }else if(ldno.ld === 2 ){
-
-                $("#ld1").addClass("ld-hide")
-                $("#ld2").addClass("ld-show")
-                $("#ld3").addClass("ld-hide")
-                $("#ld4").addClass("ld-hide")
-
-            }else if(ldno.ld === 3 ){
-
-                $("#ld1").addClass("ld-hide")
-                $("#ld2").addClass("ld-hide")
-                $("#ld3").addClass("ld-show")
-                $("#ld4").addClass("ld-hide")
-
-            }else if(ldno.ld === 4 ){
-
-                $("#ld1").addClass("ld-hide")
-                $("#ld2").addClass("ld-hide")
-                $("#ld3").addClass("ld-hide")
-                $("#ld4").addClass("ld-show")
-
-            }
-        })
-            
-        </script>
-    </div>
+    </div>   
 </body>
 </html>
