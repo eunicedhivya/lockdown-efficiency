@@ -12,7 +12,7 @@ function map_function(selector, chosenStateMap, stateCode){
     
 
     var width = 500, height = 500, scale = latLong[0].SCALE , center = latLong[0].CENTER;
-    var source = "http://localhost:9999/thefederal/lockdown-efficiency/assets/map/india_state_2019.json";
+    var source = "/assets/map/india_state_2019.json";
 
     d3.select(selector).html(null)
 
