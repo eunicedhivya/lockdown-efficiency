@@ -71,7 +71,7 @@ function drawIndiaMap(selector){
         // console.log(d);
         return d.properties.ST_NM
     });
-    if($(window).width() > 767px) {
+    if($(window).width() > 767) {
         console.log("tooltip")
         svg.call(tool_tip);
     }
