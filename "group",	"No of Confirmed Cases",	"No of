@@ -1,0 +1,5 @@
+"group",	"No of Confirmed Cases",	"No of Deaths",	"No of Tests",	"StateFilter"
+"Lock Down 1.0",	2704659,	4499890,	2159981,	"Andhra Pradesh"
+"Lock Down 2.0",	2027307,	3277946, 1420518,	"Andhra Pradesh"
+"Lock Down 3.0",	1208495,	2141490,	1058031,	"Andhra Pradesh"
+"Lock Down 4.0",	1140516,	1938695,	925060,	"Andhra Pradesh"
