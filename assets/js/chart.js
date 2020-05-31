@@ -5,6 +5,7 @@ var margin = {top: 10, right: 30, bottom: 20, left: 50},
 width = 550 - margin.left - margin.right,
 height = 350 - margin.top - margin.bottom;
 
+d3.select(selector).html(null)
 // append the svg object to the body of the page
 var svg = d3.select(selector)
 .append("svg")
@@ -29,7 +30,26 @@ var linemaxno = d3.max(linedata, function(dd){
 return dd["lpr"];
 })
 
-console.log("maxno", maxno);
+// console.log("maxno", maxno);
+
+var tool_tipline = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([-20, 0])
+    .html(function(d){
+        // console.log(d);
+        // return d.properties.ST_NM
+        return "<b>" + d.group + "</b><br>LPR: "+ d.lpr;
+    });
+    svg.call(tool_tipline);
+
+    var tool_tipbar = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([-20, 0])
+    .html(function(d){
+        // console.log(d);
+        return d.key + ": "+ d.value;
+    });
+    svg.call(tool_tipbar);
 
 
 // Add X axis
@@ -82,7 +102,9 @@ svg.append("g")
   .attr("y", function(d) { return y(d.value); })
   .attr("width", xSubgroup.bandwidth())
   .attr("height", function(d) { return height - y(d.value); })
-  .attr("fill", function(d) { return color(d.key); });
+  .attr("fill", function(d) { return color(d.key); })
+  .on('mouseover', tool_tipbar.show)
+  .on('mouseout', tool_tipbar.hide)
 
 
 // Add Y axis
@@ -119,7 +141,9 @@ svg.selectAll(".dot")
     return yScale(d['lpr'])
   })
   .attr("r", 3)
-  .attr("fill", "#AB1016");
+  .attr("fill", "#AB1016")
+  .on('mouseover', tool_tipline.show)
+  .on('mouseout', tool_tipline.hide)
 
 
 }

@@ -8,11 +8,11 @@ function map_function(selector, chosenStateMap, stateCode){
         return obj["STATE_CODE"] === stateCode
     })
 
-    console.log("latLong", latLong);
+    // console.log("latLong", JSON.stringify(chosenStateMap));
     
 
     var width = 500, height = 500, scale = latLong[0].SCALE , center = latLong[0].CENTER;
-    var source = "/assets/map/india_state_2019.json";
+    var source = "assets/map/india_state_2019.json";
 
     d3.select(selector).html(null)
 
@@ -39,7 +39,7 @@ function map_function(selector, chosenStateMap, stateCode){
     var geoPath = d3.geoPath()
     .projection(projection)
 
-    console.log("chosenStateMap", chosenStateMap)
+    // console.log("chosenStateMap", chosenStateMap)
 
     g.selectAll(".selectedstate")
             .data(chosenStateMap).enter().append("path")
@@ -55,7 +55,7 @@ function map_function(selector, chosenStateMap, stateCode){
 
 function drawIndiaMap(selector){
     var width = 300, height = 332, scale = 580, center = [82.8, 23.4];
-    var source = "/assets/map/india_state_2019.json";
+    var source = "assets/map/india_state_2019.json";
     var svg = d3.select(selector)
     .append("svg")
     .attr("class", "india map")
@@ -68,7 +68,7 @@ function drawIndiaMap(selector){
     .attr("class", "d3-tip")
     .offset([35, 0])
     .html(function(d){
-        console.log(d);
+        // console.log(d);
         return d.properties.ST_NM
     });
     svg.call(tool_tip);
@@ -108,6 +108,17 @@ function drawIndiaMap(selector){
 
                     var stateName = filterState[0].properties.ST_NM
                     var stateCode = filterState[0].properties.ST_VC
+
+                    var fdBar = _.filter(lockdowndata, function(obj){
+                        return obj.StateFilter === stateName
+                    })
+                    var fdLine = _.filter(posititvityrate, function(obj){
+                        return obj.StateFilter === stateName
+                    })
+
+                    // console.log("fd", fd)
+
+                    drawChart(".generatedchart", fdBar, fdLine)
 
                     // console.log("filterState", stateCode, stateName)
 
