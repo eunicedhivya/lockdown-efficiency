@@ -71,8 +71,9 @@ function drawIndiaMap(selector){
         // console.log(d);
         return d.properties.ST_NM
     });
+    if($(window).width() > 767px) {
     svg.call(tool_tip);
-    
+    }
     var projection = d3.geoMercator()
     .scale(scale)
     .center(center)
