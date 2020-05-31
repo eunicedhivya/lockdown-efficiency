@@ -12,7 +12,7 @@ function map_function(selector, chosenStateMap, stateCode){
     
 
     var width = 500, height = 500, scale = latLong[0].SCALE , center = latLong[0].CENTER;
-    var source = "/assets/map/india_state_2019.json";
+    var source = "https://eunicedhivya.github.io/lockdown-efficiency/assets/map/india_state_2019.json";
 
     d3.select(selector).html(null)
 
@@ -26,12 +26,11 @@ function map_function(selector, chosenStateMap, stateCode){
 
     var g = svg.append("g")
 
-    var tool_tip = d3.tip()
-    .attr("class", "d3-tip")
-    .offset([-8, 0])
-        .html("Tooltip");
-    svg.call(tool_tip);
+   
     
+    
+
+
     var projection = d3.geoMercator()
     .scale(scale)
     .center(center)
@@ -64,6 +63,15 @@ function drawIndiaMap(selector){
     .attr("preserveAspectRatio", "xMinYMin")
 
     var g = svg.append("g")
+
+    var tool_tip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([35, 0])
+    .html(function(d){
+        console.log(d);
+        return d.properties.ST_NM
+    });
+    svg.call(tool_tip);
     
     var projection = d3.geoMercator()
     .scale(scale)
@@ -85,8 +93,8 @@ function drawIndiaMap(selector){
                 .attr("stroke", "#000000")
                 .attr("stroke-width", 0.2)
                 .attr('fill', "#FFCCCB")
-                // .on('mouseover', tool_tip.show)
-                // .on('mouseout', tool_tip.hide)
+                .on('mouseover', tool_tip.show)
+                .on('mouseout', tool_tip.hide)
                 .on("click", function(d,i){
 
                     console.log(d)
@@ -98,11 +106,13 @@ function drawIndiaMap(selector){
                         return item.properties.ST_NM === d.properties.ST_NM
                     })
 
-                    // var stateName = filterState[0].properties.ST_NM
+                    var stateName = filterState[0].properties.ST_NM
                     var stateCode = filterState[0].properties.ST_VC
 
                     // console.log("filterState", stateCode, stateName)
 
+
+                    d3.select("#state-name").text(stateName)
                     map_function(".selectedmap", filterState, stateCode)
                     
 
