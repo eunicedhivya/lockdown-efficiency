@@ -22,7 +22,15 @@ function map_function(selector, chosenStateMap, stateCode){
     .attr("viewBox", "0 0 " + width + " " + height)
     .attr("preserveAspectRatio", "xMinYMin")
 
+    
+
     var g = svg.append("g")
+
+    var tool_tip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([-8, 0])
+        .html("Tooltip");
+    svg.call(tool_tip);
     
     var projection = d3.geoMercator()
     .scale(scale)
@@ -39,9 +47,9 @@ function map_function(selector, chosenStateMap, stateCode){
                 .attr("d", geoPath)
                 .attr("class", "selectedstate")
                 .attr("stroke", "#000000")
-                .attr("stroke-width", 0.2)
+                .attr("stroke-width", 1)
                 .attr('fill', function(d,i){
-                    return "#FFFFFF"   
+                    return "#800020"   
                 })
 
 }
@@ -76,16 +84,14 @@ function drawIndiaMap(selector){
                 .attr("class", "state")
                 .attr("stroke", "#000000")
                 .attr("stroke-width", 0.2)
-                .attr('fill', function(d,i){
-                    return "#FFFFFF"
-                    
-                    
-                })
+                .attr('fill', "#FFCCCB")
                 // .on('mouseover', tool_tip.show)
                 // .on('mouseout', tool_tip.hide)
                 .on("click", function(d,i){
 
                     console.log(d)
+                    d3.selectAll(".state").attr("fill", "#FFCCCB")
+                    d3.select(this).attr("fill", "#800020")
 
                     var filterState =  _.filter(statewise, function(item){
                         // console.log(item.properties.ST_NM == "Nagaland");

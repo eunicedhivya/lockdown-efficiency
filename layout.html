@@ -99,6 +99,35 @@
             stroke-width: 2;
         }
 
+        .d3-tip {
+      line-height: 1;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+ 
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+ 
+    /* Style northward tooltips specifically */
+    .d3-tip.n:after {
+      margin: -2px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
         /*For mobile devices*/
         @media screen  and (max-width: 767px) {
             .lockdown-container .ld-visual {
@@ -145,7 +174,7 @@
     </div>  <!--/ .lockdown-container -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script src="https://thefederal.com/embed/common-js/d3.v4.min.js"></script>
-	<script src="assets/js/d3-tip.js"></script>
+	<script src="https://thefederal.com/embed/corona-dashboard-master/js/d3-tip.js"></script>
 	<script src="https://d3js.org/topojson.v2.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://thefederal.com/embed/common-js/underscore-min.js"></script>
