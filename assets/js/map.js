@@ -67,15 +67,23 @@ function drawIndiaMap(selector){
     .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000])
     .range([ "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603","#7f2704"]);
 
-    var formatDecimalComma = d3.format(",.2f")
+    var formatComma = d3.format(",")
 
 
     var tool_tip = d3.tip()
     .attr("class", "d3-tip")
-    .offset([35, 0])
+    .offset([20, 0])
     .html(function(d){
-        // console.log(d);
-        return d.properties.ST_NM
+        var fdBarData = _.filter(totalConfirmedCases, function(obj){
+            return obj.StateName === d.properties.ST_NM
+        })
+        if(fdBarData[0] !== undefined){
+            return "<b>" + d.properties.ST_NM +"</b><br> Total confirmed cases: "+ formatComma(fdBarData[0]["totalIndianCases"])
+        }else{
+            return "<b>"+ d.properties.ST_NM+"</b>"
+        }
+        
+
     });
     if($(window).width() > 767) {
         console.log("tooltip")
@@ -102,16 +110,20 @@ function drawIndiaMap(selector){
                 .attr("stroke-width", 0.2)
                 .attr('fill', function(d,i){
                     
-                    var fdBarData = _.filter(lockdowndata, function(obj){
+                    var fdBarData = _.filter(totalConfirmedCases, function(obj){
                         // console.log(obj);
-                        return obj.group === "Lock Down 4.0" && obj.StateFilter === d.properties.ST_NM
+                        return obj.StateName === d.properties.ST_NM
                     })
+                    // var fdBarData = _.filter(lockdowndata, function(obj){
+                    //     // console.log(obj);
+                    //     return obj.group === "Lock Down 4.0" && obj.StateFilter === d.properties.ST_NM
+                    // })
 
 
                     // console.log(fdBarData[0]);
 
                     if(fdBarData[0] !== undefined){
-                        return colorScale(fdBarData[0]["No. of Confirmed Cases"])
+                        return colorScale(fdBarData[0]["totalIndianCases"])
                     }else{
                         return "#FFFFFF"
                     }
@@ -157,9 +169,15 @@ function drawIndiaMap(selector){
                         return obj.StateFilter === stateName
                     })
 
-                    console.log("fd", fdBar.length, fdLine/length) 
+                    console.log("fdBar", fdBar[0]);
+                    
+                    if(fdBar[0] !== undefined){
+                        drawChart(".generatedchart", fdBar, fdLine)
+                    }else{
+                        d3.select(".generatedchart").html("<p> No Data Available </p>")
+                    }
 
-                    drawChart(".generatedchart", fdBar, fdLine)
+                    
 
                     // console.log("filterState", stateCode, stateName)
 

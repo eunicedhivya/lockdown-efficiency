@@ -5,6 +5,9 @@ var margin = {top: 10, right: 60, bottom: 20, left: 70},
 width = 550 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 
+var formatDecimalComma = d3.format(",.2f")
+var formatComma = d3.format(",")
+
 d3.select(selector).html(null)
 // append the svg object to the body of the page
 var svg = d3.select(selector)
@@ -42,7 +45,7 @@ var tool_tipline = d3.tip()
     .attr("class", "d3-tip")
     .offset([-20, 0])
     .html(function(d){
-        return "<b>" + d.group + "</b><br>LPR: "+ d.lpr;
+        return "<b>" + d.group + "</b><br>LPR: "+ formatDecimalComma(d.lpr);
     });
     svg.call(tool_tipline);
 
@@ -51,7 +54,7 @@ var tool_tipline = d3.tip()
     .offset([-20, 0])
     .html(function(d){
         console.log(d);
-        return d.key + ": "+ d.value;
+        return d.key + ": "+ formatComma(d.value);
     });
     svg.call(tool_tipbar);
 
@@ -93,20 +96,33 @@ svg.selectAll(".groupbg")
     .attr("width", "80px")
     .attr("fill", "#e8e8e8")
     .attr("x", function(D, i){
-      // console.log(D["No. of Tests"]);
       return x(D["group"])
     })
-    .attr("y", function(D){ return y(0) })
-    .attr("height", function(D){ return height - y(0) })
+    .attr("y", function(D){ return 0 })
+    .attr("height", function(D){ return height})
 
-svg.selectAll(".groupbg")
-    .transition().duration(1000)
-    .attr("y", function(D){
-      return y(D["No. of Tests"])
-    })
-    .attr("height", function(D){
-      return height - y(D["No. of Tests"])
-    })
+
+// svg.selectAll(".groupbg")
+//     .data(grpdata).enter()
+//     .append("rect")
+//     .attr("class", "groupbg")
+//     .attr("width", "80px")
+//     .attr("fill", "#e8e8e8")
+//     .attr("x", function(D, i){
+//       // console.log(D["No. of Tests"]);
+//       return x(D["group"])
+//     })
+//     .attr("y", function(D){ return y(0) })
+//     .attr("height", function(D){ return height - y(0) })
+
+// svg.selectAll(".groupbg")
+//     .transition().duration(1000)
+//     .attr("y", function(D){
+//       return y(D["No. of Tests"])
+//     })
+//     .attr("height", function(D){
+//       return height - y(D["No. of Tests"])
+//     })
 
 // Show the bars
 svg.append("g")
@@ -188,7 +204,7 @@ svg.selectAll(".dot")
     // console.log("cy", yScale(d['lpr']));
     return yScale(d['lpr'])
   })
-  .attr("r", 3)
+  .attr("r", 4)
   .attr("fill", "#9C51b6")
   .on('mouseover', tool_tipline.show)
   .on('mouseout', tool_tipline.hide)
