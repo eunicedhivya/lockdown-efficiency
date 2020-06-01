@@ -125,10 +125,21 @@ var line = d3.line()
 .x(function(d) { return x(d['group']); })
 .y(function(d) { return yScale(d['lpr']); });
 
-svg.append("g")
+path = svg.append("g")
   .append("path")
   .attr("class", "line")
   .attr("d", line(linedata))
+
+var totalLength = path.node().getTotalLength();
+
+  // Set Properties of Dash Array and Dash Offset and initiate Transition
+  path
+    .attr("stroke-dasharray", totalLength + " " + totalLength)
+    .attr("stroke-dashoffset", totalLength)
+    .transition() // Call Transition Method
+    .duration(1000) // Set Duration timing (ms)
+    .ease(d3.easeLinear) // Set Easing option
+    .attr("stroke-dashoffset", 0); // Set final value of dash-offset for transition
 
   // console.log("line", line(data2));
   
