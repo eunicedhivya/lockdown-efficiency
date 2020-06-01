@@ -194,7 +194,7 @@ svg.append("text")
   .attr("y", -65)
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
-  .text("Summary");
+  .text("No. of cases");
 
 svg.append("text")
   .attr("class", "y label")

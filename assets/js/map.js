@@ -109,7 +109,7 @@ function drawIndiaMap(selector){
                     })
 
 
-                    console.log(fdBarData[0]);
+                    // console.log(fdBarData[0]);
 
                     if(fdBarData[0] !== undefined){
                         return colorScale(fdBarData[0]["No. of Confirmed Cases"])
@@ -123,14 +123,27 @@ function drawIndiaMap(selector){
                 .on('mouseout', tool_tip.hide)
                 .on("click", function(d,i){
 
-                    console.log(d)
-                    d3.selectAll(".state").attr("fill", "#FFCCCB")
-                    d3.select(this).attr("fill", "#656565")
+                    // var fdBarData = _.filter(lockdowndata, function(obj){
+                    //     // console.log(obj);
+                    //     return obj.group === "Lock Down 4.0" && obj.StateFilter === d.properties.ST_NM
+                    // })
+
+                    // if(fdBarData[0] !== undefined){
+                    //     // return colorScale(fdBarData[0]["No. of Confirmed Cases"])
+                    // }else{
+                    //     // return "#FFFFFF"
+                    // }
+
+                    // console.log(d)
+                    // d3.selectAll(".state").attr("fill", "#FFCCCB")
+                    // d3.select(this).attr("fill", "#656565")
 
                     var filterState =  _.filter(statewise, function(item){
                         // console.log(item.properties.ST_NM == "Nagaland");
                         return item.properties.ST_NM === d.properties.ST_NM
                     })
+
+                    
 
                     var stateName = filterState[0].properties.ST_NM
                     var stateCode = filterState[0].properties.ST_VC
