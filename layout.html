@@ -18,6 +18,10 @@
             overflow: hidden;
         }
 
+        .lockdown-group{
+            background-color: #cccccc;
+        }
+
         /* Move to Desktop Media Queries */
         .lockdown-container .ld-visual{
             display: flex;
@@ -60,42 +64,44 @@
             font-weight: 600;
             color: #000;
         }
-        .lockdown-container header ul li{
+        .lockdown-container ul.legend li{
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 15px;
             line-height: 20px;
-            font-weight: 600;
+            font-weight: 100;
             color: #000;
         }
-        .lockdown-container header ul{
+        .lockdown-container ul.legend{
             list-style: none;
+            margin: 0 0 20px 16px;
+            padding: 0;
         }
-        .lockdown-container header ul li{
+        .lockdown-container ul.legend li{
             display: inline-block;
             margin: 0 20px 0 0;
         }
-        .lockdown-container header ul li span{ 
+        .lockdown-container ul.legend li span{ 
             display: inline-block;
             width: 15px;
             height: 15px;
             /* background-color: #000; */
             border-radius: 50%;
         }
-        .lockdown-container header ul li:first-child span{
+        .lockdown-container ul.legend li:first-child span{
             background-color: #D55D29;
         }
-        .lockdown-container header ul li:nth-child(2) span{
+        .lockdown-container ul.legend li:nth-child(2) span{
             background-color: #6CA44B;
         }
-        .lockdown-container header ul li:nth-child(3) span{
+        .lockdown-container ul.legend li:nth-child(3) span{
             background-color: #3B7AC9;
         }
-        .lockdown-container header ul li:last-child span{
-            background-color: #AB1016;
+        .lockdown-container ul.legend li:last-child span{
+            background-color: #9C51b6;
         }
         .line{
             fill: none;
-            stroke: #AB1016;
+            stroke: #9C51b6;
             stroke-width: 2;
             /* stroke-dasharray:1000;
             stroke-dashoffset: 1000;
@@ -182,12 +188,7 @@
     <div class="lockdown-container">
         <header>
             <h1>Lockdown efficiency</h1>
-            <ul>
-                <li><span></span> No of Confirmed Cases</li>
-                <li><span></span> No of Deaths</li>
-                <li><span></span> No of Tests</li>
-                <li><span></span> LPR(Lock Down Positivity Rate)</li>
-            </ul>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque risus at massa dignissim, sit amet hendrerit est imperdiet. Class</p>
         </header>
         <div class="ld-visual">
             <div class="map" id="india">
@@ -200,6 +201,12 @@
                         <!-- <svg width="100%" height="300px"></svg> -->
                     </div>
                 </div> <!--/ .sub-map -->
+                <ul class="legend">
+                    <li><span></span> No. of Confirmed Cases</li>
+                    <li><span></span> No. of Deaths</li>
+                    <li><span></span> No. of Tests</li>
+                    <li><span></span> LPR (Lock Down Positivity Rate)</li>
+                </ul>
                 <div class="generatedchart">
                 </div>  <!--/ .generatedchart -->
             </div> <!--/ .contents -->

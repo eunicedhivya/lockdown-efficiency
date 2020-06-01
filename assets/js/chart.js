@@ -3,7 +3,7 @@ function drawChart(selector, grpdata, linedata){
     // set the dimensions and margins of the graph
 var margin = {top: 10, right: 60, bottom: 20, left: 70},
 width = 550 - margin.left - margin.right,
-height = 350 - margin.top - margin.bottom;
+height = 400 - margin.top - margin.bottom;
 
 d3.select(selector).html(null)
 // append the svg object to the body of the page
@@ -15,14 +15,14 @@ var svg = d3.select(selector)
 .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
 
-var subgroups = ["No of Confirmed Cases",	"No of Deaths",	"No of Tests"]
+var subgroups = ["No. of Confirmed Cases","No. of Deaths","No. of Tests"]
 
 // List of groups = species here = value of the first column called group -> I show them on the X axis
 var groups = ["Lock Down 1.0", "Lock Down 2.0", "Lock Down 3.0", "Lock Down 4.0"]
 
 var maxno = d3.max(grpdata, function(dd){
 // console.log("dd", dd["No of Tests"]);
-return dd["No of Tests"];
+return dd["No. of Tests"];
 })
 
 var linemaxno = d3.max(linedata, function(dd){
@@ -36,17 +36,15 @@ var tool_tipline = d3.tip()
     .attr("class", "d3-tip")
     .offset([-20, 0])
     .html(function(d){
-        // console.log(d);
-        // return d.properties.ST_NM
         return "<b>" + d.group + "</b><br>LPR: "+ d.lpr;
     });
     svg.call(tool_tipline);
 
-    var tool_tipbar = d3.tip()
+  var tool_tipbar = d3.tip()
     .attr("class", "d3-tip")
     .offset([-20, 0])
     .html(function(d){
-        // console.log(d);
+        console.log(d);
         return d.key + ": "+ d.value;
     });
     svg.call(tool_tipbar);
@@ -57,6 +55,7 @@ var x = d3.scaleBand()
   .domain(groups)
   .range([0, width])
   .padding([0.2])
+
 svg.append("g")
 .attr("transform", "translate(0," + height + ")")
 .call(d3.axisBottom(x).tickSize(0))
@@ -81,6 +80,28 @@ var color = d3.scaleOrdinal()
 .domain(subgroups)
 .range(['#D55D29','#6CA44B','#3B7AC9'])
 
+svg.selectAll(".groupbg")
+    .data(grpdata).enter()
+    .append("rect")
+    .attr("class", "groupbg")
+    .attr("width", "80px")
+    .attr("fill", "#e8e8e8")
+    .attr("x", function(D, i){
+      // console.log(D["No. of Tests"]);
+      return x(D["group"])
+    })
+    .attr("y", function(D){ return y(0) })
+    .attr("height", function(D){ return height - y(0) })
+
+svg.selectAll(".groupbg")
+    .transition().duration(1000)
+    .attr("y", function(D){
+      return y(D["No. of Tests"])
+    })
+    .attr("height", function(D){
+      return height - y(D["No. of Tests"])
+    })
+
 // Show the bars
 svg.append("g")
 .selectAll("g")
@@ -88,8 +109,9 @@ svg.append("g")
 .data(grpdata)
 .enter()
 .append("g")
+  .attr("class", "lockdown-group")
   .attr("transform", function(d) { return "translate(" + x(d.group) + ",0)"; })
-.selectAll("rect")
+.selectAll(".bar")
 .data(function(d) { 
   var pd = subgroups.map(function(key) { 
     // console.log("key", key);
@@ -100,6 +122,7 @@ svg.append("g")
   return pd; 
 })
 .enter().append("rect")
+    .attr("class", "bar")
     .attr("x", function(d) { return xSubgroup(d.key); })
     .attr("y", function(d) { return y(0); })
     .attr("width", xSubgroup.bandwidth())
@@ -107,7 +130,7 @@ svg.append("g")
     .on('mouseover', tool_tipbar.show)
     .on('mouseout', tool_tipbar.hide)
     
-    svg.selectAll("rect")
+    svg.selectAll(".bar")
     .transition().duration(1000)
     .attr("y", function(d) { return y(d.value); })
     .attr("height", function(d) { return height - y(d.value); })
@@ -125,7 +148,7 @@ svg.append("g")
 .attr("class", "axis");
 
 var line = d3.line()
-.x(function(d) { return x(d['group']); })
+.x(function(d) { return x(d['group']) + 40; })
 .y(function(d) { return yScale(d['lpr']); });
 
 path = svg.append("g")
@@ -152,15 +175,15 @@ svg.selectAll(".dot")
 .enter().append("circle") // Uses the enter().append() method
   .attr("class", "dot") // Assign a class for styling
   .attr("cx", function(d, i) { 
-    console.log("cx", x(d['group']) );
-    return x(d['group'])
+    // console.log("cx", x(d['group']) );
+    return x(d['group']) + 40
   })
   .attr("cy", function(d) { 
-    console.log("cy", yScale(d['lpr']));
+    // console.log("cy", yScale(d['lpr']));
     return yScale(d['lpr'])
   })
   .attr("r", 3)
-  .attr("fill", "#AB1016")
+  .attr("fill", "#9C51b6")
   .on('mouseover', tool_tipline.show)
   .on('mouseout', tool_tipline.hide)
 

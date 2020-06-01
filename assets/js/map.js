@@ -11,7 +11,7 @@ function map_function(selector, chosenStateMap, stateCode){
     // console.log("latLong", JSON.stringify(chosenStateMap));
     
 
-    var width = 500, height = 500, scale = latLong[0].SCALE , center = latLong[0].CENTER;
+    var width = 500, height = 350, scale = latLong[0].SCALE , center = latLong[0].CENTER;
     var source = "assets/map/india_state_2019.json";
 
     d3.select(selector).html(null)
@@ -48,7 +48,7 @@ function map_function(selector, chosenStateMap, stateCode){
                 .attr("stroke", "#000000")
                 .attr("stroke-width", 1)
                 .attr('fill', function(d,i){
-                    return "#800020"   
+                    return "#656565"   
                 })
 
 }
@@ -63,6 +63,13 @@ function drawIndiaMap(selector){
     .attr("preserveAspectRatio", "xMinYMin")
 
     var g = svg.append("g")
+
+    var colorScale = d3.scaleThreshold()
+    .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000])
+    .range(["#fff7ec","#fee8c8","#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#b30000","#7f0000"]);
+
+
+
 
     var tool_tip = d3.tip()
     .attr("class", "d3-tip")
@@ -94,14 +101,22 @@ function drawIndiaMap(selector){
                 .attr("class", "state")
                 .attr("stroke", "#000000")
                 .attr("stroke-width", 0.2)
-                .attr('fill', "#FFCCCB")
+                .attr('fill', function(d,i){
+                    
+                    // var fdBar = _.filter(lockdowndata, function(obj){
+                    //     return obj.StateFilter === d.properties.ST_NM
+                    // })
+                    // console.log();
+                    // return colorScale(fdBar[0]["No. of Confirmed Cases"])
+                    return "#FFCCCB"
+                })
                 .on('mouseover', tool_tip.show)
                 .on('mouseout', tool_tip.hide)
                 .on("click", function(d,i){
 
                     console.log(d)
                     d3.selectAll(".state").attr("fill", "#FFCCCB")
-                    d3.select(this).attr("fill", "#800020")
+                    d3.select(this).attr("fill", "#656565")
 
                     var filterState =  _.filter(statewise, function(item){
                         // console.log(item.properties.ST_NM == "Nagaland");
