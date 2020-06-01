@@ -64,7 +64,7 @@ function drawIndiaMap(selector){
     var g = svg.append("g")
 
     var colorScale = d3.scaleThreshold()
-    .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000])
+    .domain([0, 100, 500, 1000, 5000, 10000, 20000, 40000, 60000])
     .range([ "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603","#7f2704"]);
 
     var formatComma = d3.format(",")
