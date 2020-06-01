@@ -118,7 +118,7 @@ function drawIndiaMap(selector){
                         return obj.StateFilter === stateName
                     })
 
-                    // console.log("fd", fd)
+                    console.log("fd", fdBar.length, fdLine/length) 
 
                     drawChart(".generatedchart", fdBar, fdLine)
 
@@ -126,7 +126,11 @@ function drawIndiaMap(selector){
 
 
                     d3.select("#state-name").text(stateName)
+
                     map_function(".selectedmap", filterState, stateCode)
+
+                    drawChart(".generatedchart", fdBar, fdLine)
+                   
                     
 
                    
