@@ -63,6 +63,12 @@
             line-height: 45px;
             font-weight: 600;
             color: #000;
+            margin: 0 0 0 0;
+        }
+        .lockdown-container header p{
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 16px;
+            line-height: 19px;
         }
         .lockdown-container ul.legend li{
             font-family: 'Source Sans Pro', sans-serif;
@@ -106,6 +112,10 @@
             /* stroke-dasharray:1000;
             stroke-dashoffset: 1000;
             animation: dash 1s linear; */
+        }
+
+        .active{
+            fill: #656565 !important;
         }
 
         .axis {
@@ -180,6 +190,14 @@
                 width: 10px;
                 height: 10px;
             }
+
+            .lockdown-container header {
+                grid-template-columns: 100%;
+            }
+
+            .lockdown-container header h1 {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
@@ -188,7 +206,7 @@
     <div class="lockdown-container">
         <header>
             <h1>Lockdown efficiency</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque risus at massa dignissim, sit amet hendrerit est imperdiet. Class</p>
+            <p>The chart gives an overview of the effectiveness of the four phases of lockdown. The no. of cases,  no. of deaths, no. of tests as well as Test positivity rate are considered to measure the effect of the lockdown in curbing the spread.</p>
         </header>
         <div class="ld-visual">
             <div class="map" id="india">

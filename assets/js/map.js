@@ -138,6 +138,9 @@ function drawIndiaMap(selector){
                     // d3.selectAll(".state").attr("fill", "#FFCCCB")
                     // d3.select(this).attr("fill", "#656565")
 
+                    $(".state").removeClass("active")
+                    $(this).addClass("active")
+
                     var filterState =  _.filter(statewise, function(item){
                         // console.log(item.properties.ST_NM == "Nagaland");
                         return item.properties.ST_NM === d.properties.ST_NM
