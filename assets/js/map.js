@@ -134,20 +134,6 @@ function drawIndiaMap(selector){
                 .on('mouseout', tool_tip.hide)
                 .on("click", function(d,i){
 
-                    // var fdBarData = _.filter(lockdowndata, function(obj){
-                    //     // console.log(obj);
-                    //     return obj.group === "Lock Down 4.0" && obj.StateFilter === d.properties.ST_NM
-                    // })
-
-                    // if(fdBarData[0] !== undefined){
-                    //     // return colorScale(fdBarData[0]["No. of Confirmed Cases"])
-                    // }else{
-                    //     // return "#FFFFFF"
-                    // }
-
-                    // console.log(d)
-                    // d3.selectAll(".state").attr("fill", "#FFCCCB")
-                    // d3.select(this).attr("fill", "#656565")
 
                     $(".state").removeClass("active")
                     $(this).addClass("active")
@@ -155,6 +141,10 @@ function drawIndiaMap(selector){
                     var filterState =  _.filter(statewise, function(item){
                         // console.log(item.properties.ST_NM == "Nagaland");
                         return item.properties.ST_NM === d.properties.ST_NM
+                    })
+
+                    var fdBarData = _.filter(totalConfirmedCases, function(obj){
+                        return obj.StateName === d.properties.ST_NM
                     })
 
                     
@@ -170,10 +160,19 @@ function drawIndiaMap(selector){
                     })
 
                     console.log("fdBar", fdBar[0]);
+
+                    if(fdBarData[0] !== undefined){
+                        d3.select("#tot-confirmed-cases").html("Total confirmed cases:<br><span>"+ formatComma(fdBarData[0]["totalIndianCases"])+"</span>")
+                    }else{
+                        d3.select("#tot-confirmed-cases").html("No Data Available")
+                    }
+
+                    
                     
                     if(fdBar[0] !== undefined){
                         drawChart(".generatedchart", fdBar, fdLine)
                     }else{
+                        d3.select(".generatedchart").html(null)
                         d3.select(".generatedchart").html("<p> No Data Available </p>")
                     }
 
@@ -186,7 +185,7 @@ function drawIndiaMap(selector){
 
                     map_function(".selectedmap", filterState, stateCode)
 
-                    drawChart(".generatedchart", fdBar, fdLine)
+                    // drawChart(".generatedchart", fdBar, fdLine)
                    
                     
 

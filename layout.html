@@ -50,6 +50,7 @@
             line-height: 40px;
             font-weight: 600;
             color: #000;
+            margin: 0 0 0 0;
         }
         .lockdown-container header{
             display: grid;
@@ -69,6 +70,16 @@
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 16px;
             line-height: 19px;
+        }
+        .lockdown-container  p#tot-confirmed-cases{
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            line-height: 30px;
+            margin: 0 0 0 0;
+        }
+        .lockdown-container  p#tot-confirmed-cases span{
+            font-weight: 600;
+            font-size: 36px;
         }
         .lockdown-container ul.legend li{
             font-family: 'Source Sans Pro', sans-serif;
@@ -124,6 +135,12 @@
 
         #india path:hover{
             fill: #656565;
+        }
+
+        .generatedchart p {
+            font-size: 36px;
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
         .d3-tip {
@@ -214,8 +231,10 @@
             </div> <!--/ .map -->
             <div class="contents">
                 <div class="sub-map">
-                    <h2 id="state-name">Delhi</h2>
-                    <p id="tot-confirmed-cases"></p>
+                   <div class="state-meta">
+                        <h2 id="state-name">Delhi</h2>
+                        <p id="tot-confirmed-cases"></p>
+                   </div>
                     <div class="selectedmap">
                         <!-- <svg width="100%" height="300px"></svg> -->
                     </div>
@@ -242,12 +261,22 @@
     <script src="assets/js/chart.js"></script>
     <script type="text/javascript">
         
-        
+        var formatComma2 = d3.format(",")
         drawIndiaMap("#india")
 
         drawChart(".generatedchart", defaultgrpdata, defaultlinedata)
 
         map_function(".selectedmap", defaultmap, "DL")
+
+        var fdBarData2 = _.filter(totalConfirmedCases, function(obj){
+                        return obj.StateName === "Delhi"
+                    })
+
+        if(fdBarData2[0] !== undefined){
+            d3.select("#tot-confirmed-cases").html("Total confirmed cases:<br><span>"+ formatComma2(fdBarData2[0]["totalIndianCases"])+"</span>")
+        }else{
+            d3.select("#tot-confirmed-cases").html("No Data Available")
+        }
 
     </script>
 </body>
