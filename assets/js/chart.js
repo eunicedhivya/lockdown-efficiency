@@ -1,7 +1,7 @@
 function drawChart(selector, grpdata, linedata){
 
     // set the dimensions and margins of the graph
-var margin = {top: 10, right: 60, bottom: 20, left: 70},
+var margin = {top: 10, right: 60, bottom: 50, left: 70},
 width = 550 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 
@@ -67,8 +67,8 @@ var x = d3.scaleBand()
 
 svg.append("g")
 .attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(x).tickSize(0))
-.attr("class", "axis");
+.call(d3.axisBottom(x).tickSize(10))
+.attr("class", "axis xAxis");
 
 // Add Y axis
 var y = d3.scaleLinear()
