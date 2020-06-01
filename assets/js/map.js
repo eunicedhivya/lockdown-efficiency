@@ -45,11 +45,10 @@ function map_function(selector, chosenStateMap, stateCode){
             .data(chosenStateMap).enter().append("path")
                 .attr("d", geoPath)
                 .attr("class", "selectedstate")
-                .attr("stroke", "#000000")
-                .attr("stroke-width", 1)
                 .attr('fill', function(d,i){
                     return "#656565"   
                 })
+
 
 }
 
@@ -68,7 +67,7 @@ function drawIndiaMap(selector){
     .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000])
     .range([ "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603","#7f2704"]);
 
-
+    var formatDecimalComma = d3.format(",.2f")
 
 
     var tool_tip = d3.tip()
