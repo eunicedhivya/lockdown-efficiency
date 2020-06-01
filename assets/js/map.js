@@ -66,7 +66,7 @@ function drawIndiaMap(selector){
 
     var colorScale = d3.scaleThreshold()
     .domain([0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000])
-    .range(["#fff7ec","#fee8c8","#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#b30000","#7f0000"]);
+    .range([ "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603","#7f2704"]);
 
 
 
@@ -103,12 +103,21 @@ function drawIndiaMap(selector){
                 .attr("stroke-width", 0.2)
                 .attr('fill', function(d,i){
                     
-                    // var fdBar = _.filter(lockdowndata, function(obj){
-                    //     return obj.StateFilter === d.properties.ST_NM
-                    // })
-                    // console.log();
+                    var fdBarData = _.filter(lockdowndata, function(obj){
+                        // console.log(obj);
+                        return obj.group === "Lock Down 4.0" && obj.StateFilter === d.properties.ST_NM
+                    })
+
+
+                    console.log(fdBarData[0]);
+
+                    if(fdBarData[0] !== undefined){
+                        return colorScale(fdBarData[0]["No. of Confirmed Cases"])
+                    }else{
+                        return "#FFFFFF"
+                    }
                     // return colorScale(fdBar[0]["No. of Confirmed Cases"])
-                    return "#FFCCCB"
+                    
                 })
                 .on('mouseover', tool_tip.show)
                 .on('mouseout', tool_tip.hide)
