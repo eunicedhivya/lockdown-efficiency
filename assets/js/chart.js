@@ -98,13 +98,18 @@ svg.append("g")
   return pd; 
 })
 .enter().append("rect")
-  .attr("x", function(d) { return xSubgroup(d.key); })
-  .attr("y", function(d) { return y(d.value); })
-  .attr("width", xSubgroup.bandwidth())
-  .attr("height", function(d) { return height - y(d.value); })
-  .attr("fill", function(d) { return color(d.key); })
-  .on('mouseover', tool_tipbar.show)
-  .on('mouseout', tool_tipbar.hide)
+    .attr("x", function(d) { return xSubgroup(d.key); })
+    .attr("y", function(d) { return y(0); })
+    .attr("width", xSubgroup.bandwidth())
+    .attr("height", function(d) { return height - y(0); })
+    .on('mouseover', tool_tipbar.show)
+    .on('mouseout', tool_tipbar.hide)
+    
+    svg.selectAll("rect")
+    .transition().duration(1000)
+    .attr("y", function(d) { return y(d.value); })
+    .attr("height", function(d) { return height - y(d.value); })
+    .attr("fill", function(d) { return color(d.key); })
 
 
 // Add Y axis
