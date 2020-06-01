@@ -1,4 +1,4 @@
-# lockdown-efficiency
+# Lockdown efficiency
 
 [demo](https://eunicedhivya.github.io/lockdown-efficiency/layout.html)
 
