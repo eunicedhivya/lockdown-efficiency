@@ -158,6 +158,41 @@ svg.append("g")
     .attr("height", function(d) { return height - y(d.value); })
     .attr("fill", function(d) { return color(d.key); })
 
+svg.append("g")
+  .selectAll("g")
+    .data(grpdata)
+    .enter()
+    .append("g")
+      .attr("class", "lockdown-text-group")
+      .attr("transform", function(d) { return "translate(" + x(d.group) + ",0)"; })
+    .selectAll(".bar-text")
+    .data(function(d) { 
+      var pd = subgroups.map(function(key) { 
+        // console.log("key", key);
+        // console.log("d",  d[key]);
+        
+        return {key: key, value: parseInt(d[key])}; 
+      })
+      return pd; 
+    })
+    .enter().append("text")
+        .attr("class", "bar-text")
+        .attr("x", function(d) { 
+          
+          return xSubgroup(d.key) + 12; 
+        })
+        .attr("y", function(d) { return y(d.value) - 15; })
+        .attr("dy", "0.22em")
+        .attr("text-anchor", "middle")
+        .text(function(d){
+          console.log(d.value);
+
+          if(d.key === "No. of Deaths"){
+            return d.value
+          }
+          
+        })
+
 
 // Add Y axis
 
