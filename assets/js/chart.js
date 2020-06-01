@@ -17,6 +17,12 @@ var svg = d3.select(selector)
 
 var subgroups = ["No. of Confirmed Cases","No. of Deaths","No. of Tests"]
 
+var replaceCat = {
+  "No. of Confirmed Cases": "No. of confirmed cases",
+  "No. of Deaths": "No. of deaths",
+  "No. of Tests": "No. of tests"
+}
+
 // List of groups = species here = value of the first column called group -> I show them on the X axis
 var groups = ["Lock Down 1.0", "Lock Down 2.0", "Lock Down 3.0", "Lock Down 4.0"]
 
