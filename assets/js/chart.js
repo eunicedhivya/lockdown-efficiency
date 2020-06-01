@@ -1,7 +1,7 @@
 function drawChart(selector, grpdata, linedata){
 
     // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 20, left: 50},
+var margin = {top: 10, right: 60, bottom: 20, left: 70},
 width = 550 - margin.left - margin.right,
 height = 350 - margin.top - margin.bottom;
 
@@ -115,7 +115,7 @@ svg.append("g")
 // Add Y axis
 
 var yScale = d3.scaleLinear()
-.domain([0, Math.round(linemaxno)]) // input 
+.domain([0, Math.round(linemaxno+2)]) // input 
 .range([height, 0]);
 svg.append("g")
 .attr("transform", "translate("+ width +",0)")
@@ -149,6 +149,24 @@ svg.selectAll(".dot")
   .attr("fill", "#AB1016")
   .on('mouseover', tool_tipline.show)
   .on('mouseout', tool_tipline.hide)
+
+svg.append("text")
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("x", -75)
+  .attr("y", -65)
+  .attr("dy", ".75em")
+  .attr("transform", "rotate(-90)")
+  .text("Summary");
+
+svg.append("text")
+  .attr("class", "y label")
+  .attr("text-anchor", "end")
+  .attr("x", -75)
+  .attr("y", 450)
+  .attr("dy", ".75em")
+  .attr("transform", "rotate(-90)")
+  .text("LPR");
 
 
 }
