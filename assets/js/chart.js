@@ -59,14 +59,16 @@ var x = d3.scaleBand()
   .padding([0.2])
 svg.append("g")
 .attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(x).tickSize(0));
+.call(d3.axisBottom(x).tickSize(0))
+.attr("class", "axis");
 
 // Add Y axis
 var y = d3.scaleLinear()
 .domain([0, maxno])
 .range([ height, 0 ]);
 svg.append("g")
-.call(d3.axisLeft(y));
+.call(d3.axisLeft(y))
+.attr("class", "axis");
 
 // Another scale for subgroup position?
 var xSubgroup = d3.scaleBand()
@@ -119,7 +121,8 @@ var yScale = d3.scaleLinear()
 .range([height, 0]);
 svg.append("g")
 .attr("transform", "translate("+ width +",0)")
-.call(d3.axisRight(yScale));
+.call(d3.axisRight(yScale))
+.attr("class", "axis");
 
 var line = d3.line()
 .x(function(d) { return x(d['group']); })
